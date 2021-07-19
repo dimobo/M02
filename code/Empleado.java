@@ -29,6 +29,7 @@ public class Empleado {
 		ayuda = false;
 		bonus = false;
 		beca = 0;
+		bonusAnual = 0;
 
 	}
 
@@ -50,7 +51,7 @@ public class Empleado {
 		} else
 			this.ayuda = false;
 
-		if (ayuda == true) {
+		if (ayuda == true && this.empleado.equals("Volunteer")) {
 			this.beca = AYUDAEUROS;
 		}
 
@@ -62,7 +63,7 @@ public class Empleado {
 		this.salarioLimpioMensual = calcSalarioLimpio(empleado, this.salarioSucioMensual);
 		this.salarioLimpioAnual = this.salarioLimpioMensual * 12;
 
-		if (bonus == true) {
+		if (bonus == true && !this.empleado.equals("Volunteer")) {
 			this.bonusAnual = this.salarioSucioMensual * 0.1;
 		} else
 			this.bonusAnual = 0;
@@ -124,6 +125,15 @@ public class Empleado {
 			return 0.0;
 		}
 
+	}
+
+	@Override
+	public String toString() {
+		return "Nivel del empleado: " + this.empleado + "\nSalario sucio mensual: " + this.salarioSucioMensual
+				+ "\nSalario sucio anual: " + this.salarioSucioAnual + "\nSalario limpio mensual: "
+				+ this.salarioLimpioMensual + "\nSalario Limpio anual: " + this.salarioSucioAnual + "\nRecibe ayuda: "
+				+ this.ayuda + "\nAyuda recibida: " + this.beca + "\nRecibe bonus: " + this.bonus
+				+ "\nBonus anual recibido: " + bonusAnual+"\n\n";
 	}
 
 	// Zona getters and setters
