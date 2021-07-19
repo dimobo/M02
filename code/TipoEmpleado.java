@@ -10,8 +10,8 @@ public class TipoEmpleado extends Empleado {
 		super();
 	}
 
-	public TipoEmpleado(String empleado, double salario) {
-		super(empleado, salario);
+	public TipoEmpleado(String empleado, double salario, boolean ayuda, boolean bonus) {
+		super(empleado, salario, ayuda, bonus);
 
 	}
 
@@ -79,7 +79,6 @@ public class TipoEmpleado extends Empleado {
 		default:
 			return 0;
 		}
-
 	}
 
 }

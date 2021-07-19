@@ -10,7 +10,7 @@ public class M02APP {
 		arrayEmp[0] = new Empleado();
 		
 		
-		System.out.println(arrayTipEmp[0].getSalario());
+		
 	}
 
 }

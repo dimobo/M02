@@ -6,18 +6,34 @@ public class Empleado {
 
 	// Atributos del objeto empleado.
 	protected String empleado;
-	protected double salario;
+	// protected double salario; En Minestrone 3 este deja de tener importancia
+	// porque controlamos los sueldos de otra forma.
+
+	// Atributos añadidos en la Milestone 3
+	protected double salarioLimpioMensual, salarioSucioMensual, salarioLimpioAnual, salarioSucioAnual, beca, bonusAnual;
+	protected boolean ayuda, bonus;
+
+	// Esto representa la cantitad monetaria del ayuda governamental.
+	protected final double AYUDAEUROS = 300;
 
 	// Constructor por defecto.
 	public Empleado() {
 
 		empleado = "";
-		salario = 0;
+		// salario = 0; En Minestrone 3 este deja de tener importancia porque
+		// controlamos los sueldos de otra forma.
+		salarioLimpioMensual = 0;
+		salarioLimpioAnual = 0;
+		salarioSucioMensual = 0;
+		salarioSucioAnual = 0;
+		ayuda = false;
+		bonus = false;
+		beca = 0;
 
 	}
 
 	// Constructor para la clase empleado.
-	public Empleado(String empleado, double salario) {
+	public Empleado(String empleado, double salario, boolean ayuda, boolean bonus) {
 
 		// En caso de que se introduzca un valor no aceptado para empleado se
 		// introducira volunteer por defecto.
@@ -27,7 +43,29 @@ public class Empleado {
 			this.empleado = "Volunteer";
 		}
 
-		this.salario = calcSalario(empleado, salario);
+		// Esto controlará si el empleado ha de recibir o no una ayuda (En caso que sea
+		// volunteer y se indique).
+		if (this.empleado.equals("Volunteer") && ayuda == true) {
+			this.ayuda = true;
+		} else
+			this.ayuda = false;
+
+		if (ayuda == true) {
+			this.beca = AYUDAEUROS;
+		}
+
+		// this.salario = calcSalario(empleado, salario); En Minestrone 3 este deja de
+		// tener importancia porque controlamos los sueldos de otra forma.
+
+		this.salarioSucioMensual = calcSalario(empleado, salario);
+		this.salarioSucioAnual = this.salarioSucioMensual * 12;
+		this.salarioLimpioMensual = calcSalarioLimpio(empleado, this.salarioSucioMensual);
+		this.salarioLimpioAnual = this.salarioLimpioMensual * 12;
+
+		if (bonus == true) {
+			this.bonusAnual = this.salarioSucioMensual * 0.1;
+		} else
+			this.bonusAnual = 0;
 
 	}
 
@@ -52,9 +90,34 @@ public class Empleado {
 		case "Boss":
 			return salario + salario * 0.50;
 		case "Manager":
-			return salario + salario + salario * 0.10;
+			return salario + salario * 0.10;
 		case "Employee":
-			return salario - salario * 0.10;
+			return salario - salario * 0.15;
+		case "Volunteer":
+			return 0.0;
+		default:
+			return 0.0;
+		}
+
+	}
+
+	// Este método calculará el salario limpio mensual de los trabajadores
+	// dependiendo de su rango.
+	protected double calcSalarioLimpio(String empleado, double salario) {
+
+		switch (empleado) {
+		case "Boss":
+			return salario - salario * 0.32;
+		case "Manager":
+			return salario - salario * 0.26;
+		case "Employee":
+			return salario - salario * 0.15;
+		case "Senior":
+			return salario - salario * 0.24;
+		case "Mid":
+			return salario - salario * 0.15;
+		case "Junior":
+			return salario - salario * 0.02;
 		case "Volunteer":
 			return 0.0;
 		default:
@@ -72,15 +135,24 @@ public class Empleado {
 		this.empleado = empleado;
 	}
 
-	public double getSalario() {
-		return salario;
+	public double getSalarioLimpioMensual() {
+		return salarioLimpioMensual;
 	}
 
-	public void setSalario(double salario) {
-		this.salario = salario;
+	public double getSalarioSucioMensual() {
+		return salarioSucioMensual;
 	}
-	
-	
-	
+
+	public void setSalarioSucioMensual(double salarioSucioMensual) {
+		this.salarioSucioMensual = salarioSucioMensual;
+	}
+
+	public double getSalarioLimpioAnual() {
+		return salarioLimpioAnual;
+	}
+
+	public double getSalarioSucioAnual() {
+		return salarioSucioAnual;
+	}
 
 }
