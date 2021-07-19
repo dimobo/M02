@@ -8,9 +8,19 @@ public class Empleado {
 	protected String empleado;
 	protected double salario;
 
+	// Constructor por defecto.
+	public Empleado() {
+
+		empleado = "";
+		salario = 0;
+
+	}
+
 	// Constructor para la clase empleado.
 	public Empleado(String empleado, double salario) {
 
+		// En caso de que se introduzca un valor no aceptado para empleado se
+		// introducira volunteer por defecto.
 		if (empleadoDisponible().contains(empleado)) {
 			this.empleado = empleado;
 		} else {
@@ -52,5 +62,25 @@ public class Empleado {
 		}
 
 	}
+
+	// Zona getters and setters
+	public String getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(String empleado) {
+		this.empleado = empleado;
+	}
+
+	public double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}
+	
+	
+	
 
 }
